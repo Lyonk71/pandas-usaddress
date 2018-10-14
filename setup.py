@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='pandas_dedupe',
+setup(name='pandas_usaddress',
       version='0.1',
       description='An easier way to use usaddress',
       # url='http://github.com/storborg/funniest',
       author='Keith Lyons',
       author_email='flyingcircus@example.com',
       license='MIT',
-      packages=['pandas_dedupe'],
+      packages=['pandas_usaddress'],
       zip_safe=False)
