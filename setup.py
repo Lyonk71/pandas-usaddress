@@ -8,4 +8,5 @@ setup(name='pandas_usaddress',
       author_email='flyingcircus@example.com',
       license='MIT',
       packages=['pandas_usaddress'],
+      include_package_data=True,
       zip_safe=False)
