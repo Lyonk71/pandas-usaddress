@@ -2,9 +2,10 @@ import pandas as pd
 import usaddress
 import csv
 
-with open('abbreviations.csv') as abb_file:
-    abb_reader = csv.reader(abb_file)
-    abb_dict = dict(abb_reader)
+
+# with open('abbreviations.csv') as abb_file:
+#     abb_reader = csv.reader(abb_file)
+#     abb_dict = dict(abb_reader)
 
 usaddress_fields = [
                     "AddressNumber",
@@ -60,7 +61,8 @@ def taggit(x):
 
                 
         
-def tag(dataframe, address_columns, granularity='medium'):
+def tag(dfa, address_columns, granularity='medium'):
+    df = dfa.copy()
     df['address'] = ""
     for i in address_columns:
         df[i].fillna('', inplace=True)        
@@ -69,8 +71,14 @@ def tag(dataframe, address_columns, granularity='medium'):
     df['address'] = df['address'].apply(lambda x: trim(x))
     df['address'] = df['address'].apply(lambda x: x.upper())
     df['address'] = df['address'].apply(lambda x: taggit(x))
+    
     for i in usaddress_fields:
         df[i] = df['address'].apply(lambda x: usaddress_field_creation(x,i))
+        
+#     df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
+#     df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
+#     df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
+#     df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))
             
 
 
@@ -220,8 +228,4 @@ def tag(dataframe, address_columns, granularity='medium'):
         
         
         
-        
-    #df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
-    #df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
-    #df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
-    #df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))
+    return df
