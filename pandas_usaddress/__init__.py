@@ -2,10 +2,12 @@ import pandas as pd
 import usaddress
 import csv
 
+from pkg_resources import resource_filename
+filepath = resource_filename(__name__, 'abbreviations.csv')
 
-# with open('abbreviations.csv') as abb_file:
-#     abb_reader = csv.reader(abb_file)
-#     abb_dict = dict(abb_reader)
+with open(filepath) as abb_file:
+    abb_reader = csv.reader(abb_file)
+    abb_dict = dict(abb_reader)
 
 usaddress_fields = [
                     "AddressNumber",
@@ -75,10 +77,10 @@ def tag(dfa, address_columns, granularity='medium'):
     for i in usaddress_fields:
         df[i] = df['address'].apply(lambda x: usaddress_field_creation(x,i))
         
-#     df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
-#     df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
-#     df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
-#     df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))
+    df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
+    df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
+    df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
+    df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))
             
 
 
