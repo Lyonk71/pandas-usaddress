@@ -81,8 +81,7 @@ def tag(dfa, address_columns, granularity='medium', standardize=True):
     for i in usaddress_fields:
         df[i] = df['odictaddress'].apply(lambda x: usaddress_field_creation(x,i))
         
-    df = df['odictaddress'].drop(columns='odictaddress')
-    
+    df = df.drop(columns='odictaddress')              
         
     if standardize==False:
         pass
@@ -240,7 +239,6 @@ def tag(dfa, address_columns, granularity='medium', standardize=True):
                          "PlaceName",
                          "StateName",
                          "ZipCode"],inplace=True)
-        
-        
+         
         
     return df
