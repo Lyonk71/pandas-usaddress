@@ -1,1 +1,3 @@
 include pandas_usaddress/abbreviations.csv
+include pandas_usaddress/numbered_streets.csv
+include pandas_usaddress/street_numbers.csv

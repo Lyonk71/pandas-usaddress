@@ -2,12 +2,29 @@ import pandas as pd
 import usaddress
 import csv
 
+# reference abbreviations for street names
 from pkg_resources import resource_filename
 filepath = resource_filename(__name__, 'abbreviations.csv')
 
 with open(filepath) as abb_file:
     abb_reader = csv.reader(abb_file)
     abb_dict = dict(abb_reader)
+    
+# reference numbered_street file
+    from pkg_resources import resource_filename
+filepath = resource_filename(__name__, 'numbered_streets.csv')
+
+with open(filepath) as num_file:
+    num_reader = csv.reader(num_file)
+    num_dict = dict(num_reader)
+    
+# reference street_numbers file
+    from pkg_resources import resource_filename
+filepath = resource_filename(__name__, 'street_numbers.csv')
+
+with open(filepath) as str_file:
+    str_reader = csv.reader(str_file)
+    str_dict = dict(str_reader)
 
 usaddress_fields = [
                     "AddressNumber",
@@ -60,9 +77,9 @@ def taggit(x):
     except:
         None
         
-def uppercase(x):
+def lowercase(x):
     try:
-        return x.upper()
+        return x.lower()
     except:
         pass
                       
@@ -75,7 +92,7 @@ def tag(dfa, address_columns, granularity='medium', standardize=True):
     df['odictaddress'] = df['odictaddress'].str.cat(df[address_columns].astype(str), sep=" ", na_rep='')
     df['odictaddress'] = df['odictaddress'].str.replace('[^\w\s]','')
     df['odictaddress'] = df['odictaddress'].apply(lambda x: trim(x))
-    df['odictaddress'] = df['odictaddress'].apply(lambda x: uppercase(x))
+    df['odictaddress'] = df['odictaddress'].apply(lambda x: lowercase(x))
     df['odictaddress'] = df['odictaddress'].apply(lambda x: taggit(x))
     
     for i in usaddress_fields:
@@ -86,11 +103,16 @@ def tag(dfa, address_columns, granularity='medium', standardize=True):
     if standardize==False:
         pass
     
+    # standardize parameter
     elif standardize==True:
         df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
         df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
         df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
-        df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))
+        df["StreetNamePostType"] = df["StreetNamePostType"].apply(lambda x: abb_dict.get(x, x))        
+        df["StreetName"] = df["StreetName"].apply(lambda x: num_dict.get(x, x))
+        df["AddressNumber"] = df["AddressNumber"].apply(lambda x: str_dict.get(x, x))
+        
+        
     
     else:
         raise ValueError('standardize parameter must be either True or False')     
