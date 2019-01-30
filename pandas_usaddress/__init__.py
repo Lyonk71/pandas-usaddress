@@ -84,7 +84,7 @@ def lowercase(x):
         pass
                       
         
-def tag(dfa, address_columns, granularity='medium', standardize=True):
+def tag(dfa, address_columns, granularity='full', standardize=False):
     df = dfa.copy()
     df['odictaddress'] = ""
     for i in address_columns:
