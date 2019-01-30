@@ -18,10 +18,10 @@ pip install pandas-usaddress
     df = pd.read_csv('test_file.csv')
 
     #initiate usaddress
-    df_final = pandas_usaddress.tag(df, ['address_field'])
+    df = pandas_usaddress.tag(df, ['address_field'])
 
     #send output to csv
-    df_final.to_csv('parsed_output.csv')
+    df.to_csv('parsed_output.csv')
     
     
     #------------------------------additional details------------------------------
@@ -37,10 +37,10 @@ pip install pandas-usaddress
     df = pd.read_csv('test_file.csv')
 
     #initiate usaddress
-    df_final = pandas_usaddress.tag(df, ['address_field'], granularity='medium', standardize=True)
+    df = pandas_usaddress.tag(df, ['address_field'], granularity='medium', standardize=True)
 
     #send output to csv
-    df_final.to_csv('parsed_output.csv')
+    df.to_csv('parsed_output.csv')
     
     
     #------------------------------additional details------------------------------
@@ -63,10 +63,10 @@ pip install pandas-usaddress
     df = pd.read_csv('test_file.csv')
 
     #initiate usaddress
-    df_final = pandas_usaddress.tag(df, ['street_1', 'street_2', 'city', 'state'], granularity='single', standardize=True)
+    df = pandas_usaddress.tag(df, ['street1', 'street2', 'city', 'state'], granularity='single', standardize=True)
 
     #send output to csv
-    df_final.to_csv('parsed_output.csv')
+    df.to_csv('parsed_output.csv')
     
     
     #------------------------------additional details------------------------------
