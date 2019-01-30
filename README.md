@@ -63,7 +63,7 @@ pip install pandas-usaddress
     df = pd.read_csv('test_file.csv')
 
     #initiate usaddress
-    df_final = pandas_usaddress.tag(df, ['street_line1', 'street_line2', 'city', 'state'], granularity='single', standardize=True)
+    df_final = pandas_usaddress.tag(df, ['street_1', 'street_2', 'city', 'state'], granularity='single', standardize=True)
 
     #send output to csv
     df_final.to_csv('parsed_output.csv')
