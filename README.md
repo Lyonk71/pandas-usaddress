@@ -1,7 +1,7 @@
 # pandas-usaddress
 The usaddress library made easy with Pandas.
 
-Also supports standardizing addresses to USPS standards.
+Also supports standardizing addresses to meet USPS standards.
 
 # Installation
 
