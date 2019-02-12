@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import usaddress
 import csv
 
@@ -283,7 +284,7 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
                          "StateName",
                          "ZipCode"],inplace=True)
         
-    df = df.replace({'None': None, 'none': None, 'nan': None, 'NaN': None}).copy()
+    df = df.replace({'None': np.nan, 'none': np.nan, 'nan': np.nan, 'NaN': np.nan, None: np.nan}).copy()
 
         
     return df
