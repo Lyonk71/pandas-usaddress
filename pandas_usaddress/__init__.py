@@ -83,21 +83,6 @@ def lowercase(x):
         return x.lower()
     except:
         pass
-    
-def remove_cross_street(x):
-    if x == None:
-        return None
-    elif "-" not in x:
-        return x
-    else:
-        x = x.split('-')
-        return x[1]
-    
-def street_number_to_int(x):
-    try:
-        return int(x)
-    except:
-        return None
                       
         
 def tag(dfa, address_columns, granularity='full', standardize=False):
@@ -124,9 +109,6 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
     
     # standardize parameter
     elif standardize==True:
-        df['AddressNumber'] = df['AddressNumber'].apply(lambda x: remove_cross_street(x))
-        df['AddressNumber'] = df['AddressNumber'].str.replace('[^0-9]','')        
-        df['AddressNumber'] = df['AddressNumber'].apply(lambda x: street_number_to_int(x))
         df["StreetNamePreDirectional"] = df["StreetNamePreDirectional"].apply(lambda x: abb_dict.get(x, x))
         df["StreetNamePreType"] = df["StreetNamePreType"].apply(lambda x: abb_dict.get(x, x))
         df["StreetNamePostDirectional"] = df["StreetNamePostDirectional"].apply(lambda x: abb_dict.get(x, x))
