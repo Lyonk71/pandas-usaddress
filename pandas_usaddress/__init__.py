@@ -284,7 +284,7 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
                          "StateName",
                          "ZipCode"],inplace=True)
         
-    df = df.replace({'None': np.nan, 'none': np.nan, 'nan': np.nan, 'NaN': np.nan, None: np.nan}).copy()
+    df = df.replace({'None': np.nan, 'none': np.nan, 'nan': np.nan, 'NaN': np.nan, None: np.nan, '': np.nan}).copy()
 
         
     return df
