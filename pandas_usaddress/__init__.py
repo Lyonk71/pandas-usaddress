@@ -176,7 +176,7 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
         
     elif granularity=='low':
         df['StreetTag'] = ""
-        df['StreetTag'] = df['StreetTag'].str.cat(df[["AddressNumber",
+        df['StreetTag'] = df['StreetTag'].str.cat(df[[#"AddressNumber",
                                                       "StreetNamePreDirectional",
                                                       "StreetNamePreModifier",
                                                       "StreetNamePreType",
@@ -211,7 +211,7 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
                          "USPSBoxID",
                          "OccupancyType",
                          "OccupancyIdentifier",
-                         "AddressNumber",
+                         #"AddressNumber",
                          "StreetNamePreDirectional",
                          "StreetName",
                          "StreetNamePostDirectional"],inplace=True)
