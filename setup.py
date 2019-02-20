@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='pandas_usaddress',
-      version='0.2',
+      version='0.21',
       description='The usaddress library made easy with Pandas.',
       url='https://github.com/Lyonk71/pandas-usaddress',
       author='Keith Lyons',
