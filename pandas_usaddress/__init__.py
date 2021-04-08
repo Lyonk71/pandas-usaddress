@@ -91,7 +91,7 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
     for i in address_columns:
         df[i].fillna('', inplace=True)        
     df['odictaddress'] = df['odictaddress'].str.cat(df[address_columns].astype(str), sep=" ", na_rep='')
-    df['odictaddress'] = df['odictaddress'].str.replace('[^\w\s\-]','')
+    df['odictaddress'] = df['odictaddress'].str.replace('[^\w\s\-]','', regex=True)
     df['odictaddress'] = df['odictaddress'].apply(lambda x: trim(x))
     df['odictaddress'] = df['odictaddress'].apply(lambda x: lowercase(x))
     df['odictaddress'] = df['odictaddress'].apply(lambda x: taggit(x))
