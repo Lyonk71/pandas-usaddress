@@ -63,6 +63,12 @@ def usaddress_field_creation(x,i):
     except:
         None
 
+def usaddress_address_type(x):
+    try:
+        return x[1][0]
+    else:
+        None
+        
 def trim(x):
     x = str(x)
     x = x.split()
@@ -99,8 +105,8 @@ def tag(dfa, address_columns, granularity='full', standardize=False):
     
     for i in usaddress_fields:
         df[i] = df['odictaddress'].apply(lambda x: usaddress_field_creation(x,i))
-        
-    
+        df['address_type'] = df['odictaddress'].apply(usaddress_address_type)
+       
         
     df = df.drop(columns='odictaddress')              
         
